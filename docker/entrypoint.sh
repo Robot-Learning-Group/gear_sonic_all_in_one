@@ -25,10 +25,8 @@ policy_args() {
     esac
 }
 
+# コンテナは毎回新しく作るので、サービスがすでに動いていることはない
 start_xrt_service() {
-    if pgrep -x RoboticsServiceProcess >/dev/null; then
-        return
-    fi
     echo "[INFO] XRoboToolkit PC Service を起動します（ログ: /tmp/xrt_service.log）"
     (
         cd "$XRT_DIR"
@@ -36,8 +34,9 @@ start_xrt_service() {
         export QT_PLUGIN_PATH="$XRT_DIR/plugins/"
         exec ./RoboticsServiceProcess
     ) >/tmp/xrt_service.log 2>&1 &
+    local pid=$!
     sleep 2
-    if ! pgrep -x RoboticsServiceProcess >/dev/null; then
+    if ! kill -0 "$pid" 2>/dev/null; then
         echo "[ERROR] XRoboToolkit PC Service が起動しませんでした。/tmp/xrt_service.log:" >&2
         cat /tmp/xrt_service.log >&2
         exit 1
