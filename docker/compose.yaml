@@ -1,0 +1,26 @@
+name: gear_sonic_all_in_one
+
+services:
+  gear-sonic:
+    image: gear-sonic-all-in-one:latest
+    platform: linux/amd64
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    init: true
+    # ロボット（192.168.123.x）との DDS、PICO との通信、コンテナ間の ZMQ をホストのネットワークで行う
+    network_mode: host
+    ipc: host
+    gpus: all
+    # C++ の制御ループが SCHED_FIFO（リアルタイム優先度）で動くため
+    cap_add:
+      - SYS_NICE
+    ulimits:
+      rtprio: 99
+      memlock: -1
+    volumes:
+      # TensorRT エンジンのキャッシュ（初回の変換結果を次回から再利用する）
+      - ../.trt_cache:/cache/trt
+    stdin_open: true
+    tty: true
+    command: [shell]

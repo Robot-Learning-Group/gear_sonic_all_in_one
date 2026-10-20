@@ -1,0 +1,9 @@
+# イメージに要らない upstream の部分（VLA・Decoupled WBC・MotionBricks・ドキュメント）
+**/.git
+GR00T-WholeBodyControl/decoupled_wbc
+GR00T-WholeBodyControl/motionbricks
+GR00T-WholeBodyControl/docs
+GR00T-WholeBodyControl/media
+GR00T-WholeBodyControl/.venv*
+GR00T-WholeBodyControl/gear_sonic_deploy/build
+GR00T-WholeBodyControl/gear_sonic_deploy/target

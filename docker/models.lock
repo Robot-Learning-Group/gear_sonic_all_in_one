@@ -1,0 +1,23 @@
+# イメージに焼き込む配備用モデル（Hugging Face: nvidia/GEAR-SONIC）。
+# 更新するときは revision を差し替えてイメージを再ビルドする。
+# 1 行目の revision のあとに「リポジトリ内のパス  gear_sonic_deploy/ からの配置先」を並べる。
+# 配置先は upstream の download_from_hf.py と同じ。
+revision 6733128a3d8a523b1418b06bca3cdf61c8b0987f
+
+# 既定の SONIC
+model_encoder.onnx                    policy/release/model_encoder.onnx
+model_decoder.onnx                    policy/release/model_decoder.onnx
+observation_config.yaml               policy/release/observation_config.yaml
+
+# 低遅延テレオペ用
+low_latency/model_encoder.onnx        policy/low_latency/model_encoder.onnx
+low_latency/model_decoder.onnx        policy/low_latency/model_decoder.onnx
+low_latency/observation_config.yaml   policy/low_latency/observation_config.yaml
+
+# SONIC v1.1
+sonic_v1_1/model_encoder.onnx         policy/sonic_v1_1/model_encoder.onnx
+sonic_v1_1/model_decoder.onnx         policy/sonic_v1_1/model_decoder.onnx
+sonic_v1_1/observation_config.yaml    policy/sonic_v1_1/observation_config.yaml
+
+# キネマティックプランナー
+planner_sonic.onnx                    planner/target_vel/V2/planner_sonic.onnx

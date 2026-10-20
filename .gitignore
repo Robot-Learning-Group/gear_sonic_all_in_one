@@ -1,0 +1,5 @@
+*.tar
+*.tar.gz
+logs/
+# TensorRT エンジンのキャッシュ（GPU ごとに作られるのでリポジトリには入れない）
+.trt_cache/
